@@ -38,22 +38,3 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           dockerfile: ./Dockerfile
-
-  build-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - name: run single line script
-        run: echo Hello, World!
-      - name: run multi line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-          date
-
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - name: run multi line script
-        run: |
-          echo "hello github actions"
-          Get-Date
