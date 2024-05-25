@@ -45,7 +45,7 @@ jobs:
       - name: run single line script
         run: echo Hello, World!
       - name: run multi line script
-        run: 
+        run: |
           echo Add other actions to build,
           echo test, and deploy your project.
           date
@@ -54,6 +54,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: run multi line script
-        run: 
+        run: |
           echo "hello github actions"
           Get-Date
