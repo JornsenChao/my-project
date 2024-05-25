@@ -5,40 +5,53 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-java:
-
     runs-on: ubuntu-latest
     # strategy:
     #   matrix:
     #     os: [ubuntu-latest, windows-latest, macOS-latest]
-    
+
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-    - name: Build with Gradle
-      run: ./gradlew build
-    
+      - name: Build with Gradle
+        run: ./gradlew build
 
-    - name: Build and Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v6
-      with:
-        image: jornsenchao/demo-app
-        registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: ./Dockerfile
+      - name: Build and Push Docker Image
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+          image: jornsenchao/demo-app
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          dockerfile: ./Dockerfile
 
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: run single line script
+        run: echo Hello, World!
+      - name: run multi line script
+        run: echo Add other actions to build,
+          echo test, and deploy your project.
+          date
 
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: run multi line script
+        run: echo "hello github actions"
+          Get-Date
